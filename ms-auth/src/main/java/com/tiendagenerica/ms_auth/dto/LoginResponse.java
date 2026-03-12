@@ -8,5 +8,6 @@ import lombok.AllArgsConstructor;
 public class LoginResponse {
     private String token;
     private String username;
+    private String rol;
     private String mensaje;
 }

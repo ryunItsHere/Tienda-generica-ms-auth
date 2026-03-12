@@ -22,6 +22,7 @@ public class SecurityConfig {
                         // Estas rutas no necesitan token
                         .requestMatchers("/auth/login").permitAll()
                         .requestMatchers("/auth/validar").permitAll()
+                        .requestMatchers("/auth/registro").permitAll()
                         // Cualquier otra ruta necesita autenticación
                         .anyRequest().authenticated()
                 )

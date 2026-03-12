@@ -6,6 +6,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+
 @SpringBootApplication
 public class MsAuthApplication implements CommandLineRunner {
 
@@ -16,9 +17,10 @@ public class MsAuthApplication implements CommandLineRunner {
 		SpringApplication.run(MsAuthApplication.class, args);
 	}
 
-	// Este método se ejecuta automáticamente cuando arranca la app
 	@Override
 	public void run(String... args) throws Exception {
 		authService.crearAdminInicial();
 	}
+
+
 }
