@@ -14,20 +14,18 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-                // Desactiva CSRF porque usamos JWT, no sesiones
+                // 1. Desactiva CORS y CSRF para evitar bloqueos pre-flight en nubes
+                .cors(cors -> cors.disable())
                 .csrf(csrf -> csrf.disable())
 
-                // Configura qué rutas son públicas y cuáles no
+                // 2. Configura los accesos usando comodines flexibles
                 .authorizeHttpRequests(auth -> auth
-                        // Estas rutas no necesitan token
-                        .requestMatchers("/auth/login").permitAll()
-                        .requestMatchers("/auth/validar").permitAll()
-                        .requestMatchers("/auth/registro").permitAll()
-                        // Cualquier otra ruta necesita autenticación
+                        // El comodín o doble asterisco (/**) asegura que no importe el prefijo o sufijo
+                        .requestMatchers("/auth/**").permitAll()
                         .anyRequest().authenticated()
                 )
 
-                // No usamos sesiones porque JWT es stateless
+                // 3. Mantén la política sin estado para JWT
                 .sessionManagement(session -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 );
